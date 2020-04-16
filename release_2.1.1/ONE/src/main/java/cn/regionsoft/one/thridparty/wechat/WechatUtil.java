@@ -36,7 +36,6 @@ public class WechatUtil {
 		return accessTokenInfo;
 	}
 	
-	//{"openid":"oe1Evwc7lA9rVo061RyA-rkI-vO8","nickname":"morcble","sex":1,"language":"zh_CN","city":"Chengdu","province":"Sichuan","country":"CN","headimgurl":"http:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/NibGOaMbeXVrcLvkygNWtvQYuibibVf32ges4pmPmAicho6BaZPOlO8kV0LW164f5hjMLIz6qoHTXO1y5HBiasquovg\/132","privilege":[]}	
 	private static WechatUserInfo getUserInfo(String accessToken,String openId) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("accessToken", accessToken);
