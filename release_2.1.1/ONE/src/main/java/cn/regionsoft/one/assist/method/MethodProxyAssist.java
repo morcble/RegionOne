@@ -10,7 +10,7 @@ import javassist.NotFoundException;
 
 public class MethodProxyAssist {
 	private static Map<Integer,MethodProxy> methodProxyClassMap = new ConcurrentHashMap<Integer,MethodProxy>();
-	/**
+	/*
 	 * hasReturnVal = true   ,return MethodProxyWithValueReturn
 	 * hasReturnVal = false  ,return MethodProxyNoValueReturn
 	 * 

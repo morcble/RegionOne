@@ -116,8 +116,7 @@ public abstract class SQLDialet implements Dialet{
 		return sb.toString();
 	}
 	
-	/**
-	 * U
+	/*
 	 * @param bindObject
 	 * @param updateColumns 
 	 * @return

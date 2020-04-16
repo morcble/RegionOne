@@ -187,7 +187,7 @@ public class HttpUtil {
 	}
   
   
-    /** 
+    /* 
      * 测试方法. 
      * @param args 
      * @throws Exception 

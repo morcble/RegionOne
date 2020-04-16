@@ -290,11 +290,8 @@ public class RedisUtil {
 		}.getResult();
 	}
     
-    /**
+    /*
      * 给key的值减少increment
-     * @param key
-     * @param increment
-     * @return
      */
     public static long decrBy(final String key,int decrement) {
 		return new Executor<Long>() {
@@ -365,7 +362,7 @@ public class RedisUtil {
 		}.getResult();
 	}
 	
-	/**
+	/*
 	 * 批量的 {@link #setString(String, String)}
 	 * @param pairs 键值对数组{数组第一个元素为key，第二个元素为value}
 	 * @return 操作状态的集合
@@ -383,7 +380,7 @@ public class RedisUtil {
 		}.getResult();
 	}
 	
-	/**
+	/*
 	 * 批量的 {@link #getString(String)}
 	 * @param keys key数组
 	 * @return value的集合
@@ -631,7 +628,7 @@ public class RedisUtil {
 		}.getResult();
 	}
 
-	/**
+	/*
 	 * 批量的{@link #hashMultipleSet(String, Map)}，在管道中执行
 	 * @param data Map<String, Map<String, String>>格式的数据
 	 * @return 操作状态的集合
@@ -858,7 +855,7 @@ public class RedisUtil {
 //		}.getResult();
 //	}
 
-	/**
+	/*
 	 * 同{@link #batchListPushTail(String, String[], boolean)},不同的是利用redis的事务特性来实现
 	 * @param key key
 	 * @param values value的数组
@@ -965,7 +962,7 @@ public class RedisUtil {
 		}.getResult();
 	}
 	
-	/**
+	/*
 	 * 将一个或多个值 value 插入到列表 key 的表头
 	 * @param key key
 	 * @param value string value

@@ -34,11 +34,9 @@ public class CloudConnectionManager {
 	}
 	
 
-	/**
+	/*
 	 * used by framework only
 	 * @param h2oContext
-	 * @return
-	 * @throws Exception
 	 */
 	public static void releaseConnection(H2OContext h2oContext){
 		CloudDBConnection dbConnection = null;

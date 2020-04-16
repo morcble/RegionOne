@@ -17,10 +17,8 @@ public class EventFactory {
 	
 	private static Semaphore semaphore = new Semaphore(1);  
 
-	/**
+	/*
 	 * add event listener with specific key.
-	 * @param listenerKey
-	 * @param eventListener
 	 */
 	public void register(String listenerClassName,EventListener eventListener) {
 		try {
@@ -34,10 +32,8 @@ public class EventFactory {
         }  	
 	}
 	
-	/**
+	/*
 	 * remove event listener with specific key.
-	 * @param listenerKey
-	 * @param eventListener
 	 */
 	public void unregister(String listenerClassName) {
 		try {

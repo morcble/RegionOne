@@ -29,7 +29,7 @@ public class RSAUtil {
 		System.out.println("还原后的字符串为:" + messageDe);
 	}
 
-	/** 
+	/* 
 	 * 随机生成密钥对 
 	 * @throws NoSuchAlgorithmException 
 	 */  
@@ -49,7 +49,7 @@ public class RSAUtil {
 		keyMap.put(0,publicKeyString);  //0表示公钥
 		keyMap.put(1,privateKeyString);  //1表示私钥
 	}  
-	/** 
+	/* 
 	 * RSA公钥加密 
 	 *  
 	 * @param str 
@@ -71,7 +71,7 @@ public class RSAUtil {
 		return outStr;
 	}
 
-	/** 
+	/* 
 	 * RSA私钥解密
 	 *  
 	 * @param str 

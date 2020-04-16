@@ -108,7 +108,7 @@ public class MathUtil {
 		return lengthByte;
 	}
 	
-	/**
+	/*
 	 * [<s>123123]<end>
 	 * @param bytes
 	 * @param startIndex

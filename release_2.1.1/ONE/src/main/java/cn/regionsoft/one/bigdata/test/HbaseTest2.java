@@ -253,7 +253,7 @@ public class HbaseTest2 {
     }
     
     
-    /**
+    /*
     * 根据startRowKey和endRowKey筛选出区间，然后根据regxKey正则匹配和num查出最终的结果
     * @param tableName 表名
     * @param startRowKey 开始的范围

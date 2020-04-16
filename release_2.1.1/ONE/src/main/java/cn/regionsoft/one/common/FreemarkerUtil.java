@@ -94,7 +94,7 @@ public class FreemarkerUtil {
 		return fileNode;
 	}*/
 	
-	/**
+	/*
 	 * 
 	 * @param templateFileCacheKey	缓存key
 	 * @param name			模板名

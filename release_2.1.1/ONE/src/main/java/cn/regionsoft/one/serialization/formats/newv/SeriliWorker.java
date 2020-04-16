@@ -14,7 +14,7 @@ public class SeriliWorker {
 	private Map<Class,Field[]> fieldsMap = new HashMap<Class,Field[]>();
 	private ByteBuf threadBindBuf = ByteBufAllocator.DEFAULT.buffer(10);
 	
-	/**
+	/*
 	 * byte[] 转为对象
 	 * @param obj
 	 * @param classType

@@ -475,7 +475,7 @@ public class HbaseUtil{
 	}
 	
 	/**
-	 * currentPage >=1
+	 * currentPage more than 1
 	 */
 	public static RDEntityListResult getList(RDTable rdTable, Integer pageSize, Integer pageNo, RDCriteria rdCriteria) throws Exception {
 		HTable table = HbaseThreadHolder.getInstance().getThreadDatas().getDataTable();

@@ -6,7 +6,7 @@ import cn.regionsoft.one.data.persistence.H2OEntity;
 
 public interface H2ODaoI<T extends H2OEntity, I> {
 
-	/**
+	/*
 	 * create instance in data storage
 	 * @param instance
 	 * @return
@@ -18,14 +18,14 @@ public interface H2ODaoI<T extends H2OEntity, I> {
 
 	Integer delete(I id) throws Exception;
 
-	/**
+	/*
 	 * update all columns
 	 * @param instance
 	 * @throws Exception
 	 */
 	T update(T instance) throws Exception;
 
-	/**
+	/*
 	 * update specified columns in paras
 	 * @param instance
 	 * @param columns
@@ -33,7 +33,7 @@ public interface H2ODaoI<T extends H2OEntity, I> {
 	 */
 	T update(T instance, String... columns) throws Exception;
 
-	/**
+	/*
 	 * update specified columns in Set
 	 * @param instance
 	 * @param columns

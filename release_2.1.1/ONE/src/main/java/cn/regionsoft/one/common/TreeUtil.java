@@ -7,14 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- for(Entry<String,List<QueRuleNode>> entry : queRulesMap.entrySet()){
-			queRulesMap.put(entry.getKey(), TreeUtil.resolvePlainLsAsTreeLs(entry.getValue(),"ruleId","parentId","childs"));
- }
- *
- */
+
 public class TreeUtil {
-	/**
+	/*
 	 * id type only be long or string
 	 * @param treeNodeList  targetList
 	 * @param parentIdAttr	parent Id Attr name

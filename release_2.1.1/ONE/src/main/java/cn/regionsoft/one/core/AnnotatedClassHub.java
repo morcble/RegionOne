@@ -11,7 +11,7 @@ import cn.regionsoft.one.annotation.InstanceAnoType;
 import cn.regionsoft.one.annotation.NoInstanceAnoType;
 
 public class AnnotatedClassHub {
-	/**
+	/*
 	 * Annotation class name - metadata
 	 * cn.regionsoft.xframe.annotation.Autowired - framework class
 	 */
@@ -20,7 +20,7 @@ public class AnnotatedClassHub {
 	
 	private boolean isInited = false;
 
-	/**
+	/*
 	 * get framework managed class by filtering all the context classes
 	 * only can be invoked one time
 	 * @param contextClasses

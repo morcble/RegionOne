@@ -24,10 +24,8 @@ public class RegionEventBus{
 		listenerMap.remove(listenerClassName);
 	}
 	
-	/**
+	/*
 	 * 异步事件
-	 * @param event
-	 * @return
 	 */
 	public Future post(BaseEvent event) {
 		Class<?> enclosingClass = event.getClass().getEnclosingClass();
@@ -46,9 +44,8 @@ public class RegionEventBus{
 		return null;
 	}
 	
-	/**
+	/*
 	 * 同步事件
-	 * @param event
 	 */
 	public Object postSync(BaseEvent event) {
 		Class<?> enclosingClass = event.getClass().getEnclosingClass();

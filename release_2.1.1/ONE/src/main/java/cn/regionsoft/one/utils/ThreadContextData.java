@@ -5,7 +5,7 @@ import java.util.HashMap;
 import cn.regionsoft.one.core.dbconnection.H2OConnection;
 import cn.regionsoft.one.core.dbconnection.SQLConnection;
 
-/**
+/*
  * 保存带事务的connection 和不带事务的connection
  * 如果transactionDepth>0则使用带事务的connection,transactionDepth=0的时候使用不带事务的connection
  * @author fenglj

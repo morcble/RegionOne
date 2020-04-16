@@ -109,7 +109,7 @@ public class CommonUtil {
 		return webReqWrapper;
 	}
 	
-	/**
+	/*
 	 * 获取时间格式类
 	 * @param pattern
 	 * @param localeStr
@@ -125,7 +125,7 @@ public class CommonUtil {
 		return threadData.getSimpleDateFormat(pattern, localeStr.name());
 	}
 	
-	/**
+	/*
 	 * 获取时间格式类
 	 * @param pattern
 	 * @param localeStr
@@ -253,7 +253,7 @@ public class CommonUtil {
 		}
 	}
 	
-	/**
+	/*
 	 * get xframecontext for this class
 	 * @param classType
 	 * @return
@@ -282,7 +282,7 @@ public class CommonUtil {
 	}
 	
 	
-	/**
+	/*
 	 * @param classType
 	 * @return
 	 */
@@ -317,7 +317,7 @@ public class CommonUtil {
 		return h2oContext;
 	}
 	
-	/**
+	/*
 	 * TODO add cache
 	 * @param classType
 	 * @return
@@ -328,7 +328,7 @@ public class CommonUtil {
 		return h2oContext.getEntityManager();
 	}
 	
-	/**
+	/*
 	 * get all fields including parent class
 	 * @param targetClass
 	 * @param allFields
@@ -388,7 +388,7 @@ public class CommonUtil {
 		sb.append(",");
 	}
 	
-	/**
+	/*
 	 *  Resolve result set to object list
 	 * @param rs
 	 * @param resultClass
@@ -496,7 +496,7 @@ public class CommonUtil {
         return result;
 	}
 
-	/**
+	/*
 	 * Return column name and BindObject mapping
 	 * @param resultClass
 	 * @return
@@ -588,7 +588,7 @@ public class CommonUtil {
 	}
 	
 	
-	/**
+	/*
 	 * Copy value from src object to target obj  begin
 	 * @param src
 	 * @param target
@@ -685,7 +685,7 @@ public class CommonUtil {
 		return result;
 	
 	}
-	/**
+	/*
 	 * Copy value from src object to target obj  end*/
 	
 	
@@ -694,7 +694,7 @@ public class CommonUtil {
 		return source.substring(0, 1).toUpperCase() + source.substring(1);
 	}
 	
-	/**
+	/*
 	 * close stream quietly
 	 * @param closeable
 	 */
@@ -714,7 +714,7 @@ public class CommonUtil {
 		}
 	}
 
-	/**
+	/*
 	 * copy file
 	 * @param srcFile
 	 * @param targetFile
@@ -797,10 +797,10 @@ public class CommonUtil {
 	}
 	
 	
-	/**
+	/*
 	 * zip folder begin
 	 */
-	/**
+	/*
 	 * 
 	 * @param folderPath return the actual path of the generated zip file
 	 * @return
@@ -856,7 +856,7 @@ public class CommonUtil {
     		CommonUtil.closeQuietly(in);
     	}	
     }
-    /**
+    /*
 	 * zip folder end
 	 */
     
@@ -1152,7 +1152,7 @@ public class CommonUtil {
 	//private static final String injStr = "'|and|exec|insert|select|delete|update|count|*|%|chr|mid|master|truncate|char|declare|;|or|-|+|,";
 	private static final String injStr = "'|and|exec|insert|select|delete|count|*|%|chr|mid|master|truncate|char|declare|;|or|-|+|,";
 	private static final String[] injStra = injStr.split("\\|");
-	/**
+	/*
 	 * 判断sql注入
 	 * @param str
 	 * @return
@@ -1211,7 +1211,7 @@ public class CommonUtil {
 		return new String[] {content};
 	}
 	
-	/**
+	/*
 	 * 获取占位符的名字LIST
 	 * @param content
 	 * @param startTag
@@ -1303,7 +1303,7 @@ public class CommonUtil {
 		return b.toString();
 	}
 	
-	/**
+	/*
 	 * 取clz类 方法method的参数map
 	 * @param clz
 	 * @param method
@@ -1544,7 +1544,7 @@ public class CommonUtil {
 	}
 	 
 
-	/**
+	/*
 	 * 把一个文件分割成两个文件
 	 * @param filePath
 	 */
@@ -1582,7 +1582,7 @@ public class CommonUtil {
 //		}
 //	}
 	
-	/**
+	/*
 	 * 把多个文件合并成一个文件
 	 * @param filePaths
 	 * @param targetFolder
@@ -1631,7 +1631,7 @@ public class CommonUtil {
 		}
 	}
 	
-	/***
+	/*
 	  * 压缩Zip
 	  * @param data
 	  * @return

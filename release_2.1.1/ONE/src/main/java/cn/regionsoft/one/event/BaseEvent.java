@@ -7,15 +7,14 @@ public abstract class BaseEvent<T>{
 
 	public abstract void setData(T data);
 	
-	/**
+	/*
 	 * 异步事件
-	 * @return
 	 */
 	public Future publish() {
 		return EventFactory.getInstance().publishEvent(this);
 	}
 	
-	/**
+	/*
 	 * 同步事件
 	 */
 	public void publishSync() {

@@ -9,11 +9,9 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-/**
+/*
  * not threadsafe
  * @author fenglj
- *
- * @param <T>
  */
 public class ConsistentHash<T> {
     private final HashFunction hashFunction;

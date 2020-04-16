@@ -18,7 +18,7 @@ import javassist.CtMethod;
 import javassist.NotFoundException;
 
 public class InterfaceProxyAssist {
-	/**
+	/*
 	 * intercface class interceptor class, generated object
 	 */
 	private static Map<Integer,Object> interfaceProxyClassMap = new ConcurrentHashMap<Integer,Object>();
@@ -28,7 +28,7 @@ public class InterfaceProxyAssist {
 		return proxyInterface(interfaceClass,interceptor);
 	}
 	
-	/**
+	/*
 	 * 根据interface创建一个实例，用于执行interceptor中的方法
 	 * @param interfaceClass
 	 * @param interceptorImplClass

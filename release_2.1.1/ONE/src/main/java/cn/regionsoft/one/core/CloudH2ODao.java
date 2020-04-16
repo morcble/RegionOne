@@ -32,7 +32,7 @@ import cn.regionsoft.one.rpc.common.ServerConstant;
 import cn.regionsoft.one.utils.MongoHelper;
 import cn.regionsoft.one.utils.TransactionUtil;
 
-/**
+/*
  * 
  * @author liangjunf
  *
@@ -51,7 +51,7 @@ public abstract class CloudH2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I
 		return null;
 	}
 	
-	/**
+	/*
 	 * 按照非空属性进行查询
 	 * @param instance
 	 * @return
@@ -285,7 +285,7 @@ public abstract class CloudH2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I
 		return instance;
 	}
 
-	/**
+	/*
 	 * mysql & mongo
 	 */
 	@Override
@@ -318,7 +318,7 @@ public abstract class CloudH2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I
 
 	private T subUpdate(T instance, Map<String,BindColumn> dueToUpDateMap,H2OContext h2oContext,BindObject bindObject) throws Exception{
 		if(bindObject.getIdColumn()==null) throw new Exception("No Id column defined :"+bindObject.getEntityClass().getName());
-		/**
+		/*
 		 * check id column
 		 */
 		Field idField = bindObject.getIdColumn().getField();
@@ -357,7 +357,7 @@ public abstract class CloudH2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I
 
 	
 
-	/**
+	/*
 	 * 
 	 * @return
 	 * @throws ClassNotFoundException
@@ -378,13 +378,13 @@ public abstract class CloudH2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I
 	}
 
 	//enhancement for entity only------------------------------------------------------------------------------------
-	/**
+	/*
 	 */
 	protected RDListResultWrapper<T> getEntityList(RDCriteria criteria) throws Exception{
 		return getEntityList(criteria,null,null);
 	}
 	
-	/**
+	/*
 	 */
 	@SuppressWarnings("unchecked")
 	protected RDListResultWrapper<T> getEntityList(RDCriteria criteria, Integer pageNo, Integer pageSize) throws Exception{
@@ -413,9 +413,7 @@ public abstract class CloudH2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I
 		
 	}
 	
-	/**
-	 * @param preparedSql
-	 * @param sqlParas
+	/*
 	 * @return
 	 * @throws Exception
 	 */

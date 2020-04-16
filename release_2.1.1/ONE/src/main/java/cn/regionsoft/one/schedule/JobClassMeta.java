@@ -58,7 +58,7 @@ public class JobClassMeta {
 		this.jobClass = jobClass;
 	}
 
-	/**
+	/*
 	 * 动态创建不同的job class
 	 * @return
 	 * @throws Exception

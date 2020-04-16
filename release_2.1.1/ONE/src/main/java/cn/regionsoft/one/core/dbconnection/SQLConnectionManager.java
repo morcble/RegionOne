@@ -121,8 +121,6 @@ public class SQLConnectionManager {
 	/**
 	 * used by framework only
 	 * @param h2oContext
-	 * @return
-	 * @throws Exception
 	 */
 	public static void releaseConnection(H2OContext h2oContext){
 		if(h2oContext.getConnectionPool()==null)return;

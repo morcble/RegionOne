@@ -33,7 +33,7 @@ public class GsonUtil{
         }
     }
     private GsonUtil(){}
-    /**
+    /*
      * 将对象转换成json格式
      * @param ts
      * @return
@@ -45,7 +45,7 @@ public class GsonUtil{
         }
         return jsonStr;
     }
-    /**
+    /*
      * 将对象转换成json格式(并自定义日期格式)
      * @param ts
      * @return
@@ -65,7 +65,7 @@ public class GsonUtil{
         return jsonStr;
     }
     
-    /**
+    /*
      * 将json格式转换成list对象
      * @param jsonStr
      * @return
@@ -206,7 +206,7 @@ public class GsonUtil{
         }
         return objMap;
     }
-    /**
+    /*
      * 将json格式转换成map对象
      * @param jsonStr
      * @return
@@ -219,7 +219,7 @@ public class GsonUtil{
         }
         return objMap;
     }
-    /**
+    /*
      * 将json转换成bean对象
      * @param jsonStr
      * @return
@@ -231,7 +231,7 @@ public class GsonUtil{
         }
         return (T) obj;
     }
-    /**
+    /*
      * 将json转换成bean对象
      * @param jsonStr
      * @param cl
@@ -259,7 +259,7 @@ public class GsonUtil{
         }
         return (T)obj;
     }
-    /**
+    /*
      * 根据
      * @param jsonStr
      * @param key

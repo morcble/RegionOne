@@ -35,7 +35,7 @@ import cn.regionsoft.one.utils.MongoHelper;
 import cn.regionsoft.one.utils.TransactionUtil;
 import com.mongodb.client.MongoCollection;
 
-/**
+/*
  * 
  * @author liangjunf
  *
@@ -145,7 +145,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	
 	
 	/**
-	 * mysql & mongo
+	 * mysql, mongo
 	 */
 	@Override
 	public T insert(T instance) throws Exception{
@@ -181,7 +181,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	}
 	
 	/**
-	 * mysql & mongo
+	 * mysql, mongo
 	 */
 	@Override
 	public T find(I id) throws Exception{
@@ -223,7 +223,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	}
 	
 	/**
-	 * mysql & mongo
+	 * mysql, mongo
 	 */
 	public List<T> findAll() throws Exception{
 		Class<T> cls = getEntityClass();
@@ -242,7 +242,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	}
 	
 	/**
-	 * mysql & mongo
+	 * mysql, mongo
 	 */
 	@Override
 	public Integer delete(I id) throws Exception{
@@ -324,7 +324,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	}
 
 	/**
-	 * mysql & mongo
+	 * mysq, mongo
 	 */
 	@Override
 	public T update(T instance) throws Exception{
@@ -341,7 +341,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	}
 
 	/**
-	 * mysql & mongo
+	 * mysq, mongo
 	 */
 	@Override
 	public T update(T instance, String... columns) throws Exception{
@@ -353,7 +353,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	}
 
 	/**
-	 * mysql & mongo
+	 * mysq, mongo
 	 */
 	@Override
 	public T update(T instance, Set<String> columns) throws Exception{
@@ -375,7 +375,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 	}
 	
 	/**
-	 * mysql & mongo
+	 * mysq, mongo
 	 */
 	private T subUpdate(T instance, Map<String,BindColumn> dueToUpDateMap,H2OContext h2oContext,BindObject bindObject) throws Exception{
 		if(bindObject.getIdColumn()==null) throw new Exception("No Id column defined :"+bindObject.getEntityClass().getName());
@@ -546,7 +546,7 @@ public abstract class H2ODao<T extends H2OEntity,I> implements H2ODaoI<T, I>{
 		}
 	}
 	
-	/**
+	/*
 	 * mysql
 	 * Return list data by conditions
 	 * @param sql
