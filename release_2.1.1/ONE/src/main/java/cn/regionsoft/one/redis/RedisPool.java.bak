@@ -1,0 +1,102 @@
+package com.cnautosoft.one.redis;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisShardInfo;
+import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
+import redis.clients.util.Hashing;
+import redis.clients.util.Sharded;
+
+
+public final class RedisPool {
+	public static ShardedJedisPool pool;
+	public static int dataBase;
+	static{
+		JedisPoolConfig config =new JedisPoolConfig();//Jedis池配置
+		config.setMaxIdle(8);//对象最大空闲时间
+		config.setMaxWaitMillis(-1);//获取对象时最大等待时间
+		config.setTestOnBorrow(true);
+		config.setMinIdle(1);
+		config.setMaxTotal(8);
+		
+		int dbIndex = 0;
+		List<JedisShardInfo> redisNodeList =new ArrayList<JedisShardInfo>();
+        JedisShardInfo redisNode1 = new JedisShardInfo(URI.create("redis://172.16.160.135:6379/"+dbIndex));
+        //redisNode1.setPassword("12345");
+        redisNodeList.add(redisNode1);
+        
+        
+        JedisShardInfo redisNode2 = new JedisShardInfo(URI.create("redis://172.16.160.135:6378/"+dbIndex));
+        redisNode2.setPassword("123456");
+        redisNodeList.add(redisNode2);
+       
+        
+        pool = new ShardedJedisPool(config, redisNodeList, Hashing.MURMUR_HASH, Sharded.DEFAULT_KEY_TAG_PATTERN);
+		
+        /**
+         * 选择DB
+         */
+		for (Jedis jedis : pool.getResource().getAllShards()) {
+			jedis.select(1);
+		}
+	}
+
+    
+    public static ShardedJedis getShardedJedis(){
+        try {
+            if(pool != null){
+            	ShardedJedis shardedJedis = pool.getResource();
+                return shardedJedis;
+            }else{
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void returnResource(final ShardedJedis shardedJedis){
+        if(shardedJedis!=null){
+        	shardedJedis.close();
+        }
+    }
+    
+    public static void test() {
+    	ShardedJedis shardedJedis = RedisPool.getShardedJedis();
+		Jedis jedis = shardedJedis.getShard("fenglj");
+		//jedis.select(2);
+		jedis.get("fenglj");
+		shardedJedis.close();
+    }
+    
+    public static void test2() {
+    	ShardedJedis shardedJedis = RedisPool.getShardedJedis();
+		Jedis jedis = shardedJedis.getShard("fenglj1");
+		//jedis.select(2);
+		jedis.get("fenglj1");
+		shardedJedis.close();
+    }
+    
+    public static void main(String[] args) {
+    	int count = 10;
+    	long time = System.currentTimeMillis();
+    	
+    	
+    	for(int i = 0 ; i <count;i++) {
+    		ShardedJedis shardedJedis = RedisPool.getShardedJedis();
+    	
+    		System.out.println(shardedJedis.get("fenglj"));
+//    		Jedis jedis = shardedJedis.getShard("fenglj");
+//    		//jedis.select(0);
+//    		jedis.get("fenglj");
+    		shardedJedis.close();
+    	}
+    	System.out.println(count*1000/(System.currentTimeMillis()-time));
+    	
+	}
+}

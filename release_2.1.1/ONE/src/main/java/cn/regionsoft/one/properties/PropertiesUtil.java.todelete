@@ -1,0 +1,57 @@
+//package com.cnautosoft.one.properties;
+//
+//import java.io.File;
+//import java.util.Properties;
+//
+//import com.cnautosoft.one.common.Logger;
+//
+//public class PropertiesUtil {	
+//	public static Logger logger = Logger.getLogger(PropertiesUtil.class);
+//	
+//	public static String getProperty(String fileName,String key){
+//		PropertiesFileMeta meta = ConfigurationManager.configMap.get(fileName);
+//		if(meta==null)return null;
+//		checkReload(meta);
+//		return meta.getProperty(key);
+//	}
+//	
+//	public static Properties getProperties(String fileName){
+//		PropertiesFileMeta meta = ConfigurationManager.configMap.get(fileName);
+//		if(meta==null)return null;
+//		checkReload(meta);
+//		return meta.getProperties();
+//	}
+//	
+//	/**
+//	 * get property from config.properties
+//	 * @param key
+//	 * @return
+//	 */
+//	public static String getConfigProperty(String key){
+//		PropertiesFileMeta meta = ConfigurationManager.configMap.get("config.properties");
+//		if(meta==null)return null;
+//		checkReload(meta);
+//		return meta.getProperty(key);
+//	}
+//	
+//	/**
+//	 * get properties from config.properties
+//	 * @param key
+//	 * @return
+//	 */
+//	public static Properties getConfigProperties(){
+//		PropertiesFileMeta meta = ConfigurationManager.configMap.get("config.properties");
+//		if(meta==null)return null;
+//		checkReload(meta);
+//		return meta.getProperties();
+//	}
+//	
+//	private static void checkReload(PropertiesFileMeta meta){
+//		File file = new File(meta.getFilePath());
+//		if(file.exists()){
+//			if(file.lastModified()!=meta.getLastModified()){
+//				meta.reload(file);
+//			}
+//		}
+//	}
+//}

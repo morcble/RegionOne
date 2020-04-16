@@ -1,0 +1,318 @@
+//package com.cnautosoft.one.properties;
+//
+//import java.io.BufferedInputStream;
+//import java.io.BufferedReader;
+//import java.io.BufferedWriter;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.io.InputStream;
+//import java.io.InputStreamReader;
+//import java.io.OutputStreamWriter;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+//import java.util.HashMap;
+//import java.util.Map.Entry;
+//import java.util.zip.ZipEntry;
+//import java.util.zip.ZipFile;
+//import java.util.zip.ZipInputStream;
+//
+//import com.cnautosoft.one.common.Logger;
+//import com.cnautosoft.one.core.SystemContext;
+//import com.cnautosoft.one.utils.SystemAttrs;
+//import com.cnautosoft.one.core.CommonUtil;
+//
+//
+//public class ConfigurationManager {
+//	private static ConfigurationManager instance = new ConfigurationManager();
+//	public static boolean initiated = false;
+//	public synchronized void init(){
+//		if(!initiated){
+//			loadProperties();
+//			initiated = true;
+//		}
+//	}
+//	
+//	public static ConfigurationManager getInstance() {
+//		return instance;
+//	}
+//
+//	private static String NEW_LINE ="\r\n";
+//	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+//	public static Logger logger = Logger.getLogger(ConfigurationManager.class);
+//	static HashMap<String,PropertiesFileMeta> configMap = new HashMap<String,PropertiesFileMeta>();
+//
+//	private ConfigurationManager(){}
+//	
+//	public void loadProperties() {
+//		if(configMap.size()!=0)return;
+//		
+//		File folder = new File(SystemAttrs.SYSTEM_ROOT+SystemAttrs.SYSTEM_SEPERATOR+SystemAttrs.NODE_NAME);
+//		File[] files = folder.listFiles();
+//		
+//		for(File propertiesFile:files){
+//			if(propertiesFile.isDirectory())continue;
+//			if(!propertiesFile.getName().endsWith(".properties"))continue;
+//			
+//			PropertiesFileMeta meta = new PropertiesFileMeta();
+//			meta.setLastModified(propertiesFile.lastModified());
+//			meta.setFilePath(propertiesFile.getPath());
+//			meta.loadProperties(propertiesFile);
+//
+//			configMap.put(propertiesFile.getName(), meta);
+//		}
+//	}
+//	
+//	
+//	
+//	
+//	public void scanConfigFiles(){
+//		String sysEnv = System.getProperty("sysenv");//DEV
+//		if(sysEnv==null){
+//			sysEnv = "DEV";//"DEV_IND";
+//		}
+//		
+//		String deploydir = System.getProperty("deploydir");//DEV
+//		if(deploydir==null){
+//			logger.error("deploydir is empty");
+//			return;
+//		}
+//
+//		File targetFolder = new File(SystemAttrs.SYSTEM_ROOT);
+//		if(!targetFolder.exists()){
+//			targetFolder.mkdirs();
+//		}
+//		File lockFile = new File(SystemAttrs.SYSTEM_ROOT + SystemAttrs.SYSTEM_SEPERATOR + "systemlock");
+//		if(lockFile.exists())return;
+//		
+//		boolean override = true;
+//		copyZipFolder(deploydir,targetFolder,override,SystemAttrs.SYSTEM_ROOT,sysEnv);
+//	}
+//
+//	private void copyZipFolder(String deploydir, File targetFolder, boolean override, String configRootPath,String sysEnv) {
+//		ZipInputStream zin = null;
+//		InputStream in = null;
+//		try {
+//			ZipFile zf = new ZipFile(deploydir);
+//			in = new BufferedInputStream(new FileInputStream(deploydir));  
+//	        zin = new ZipInputStream(in); 
+//	        ZipEntry ze;  
+//	        
+//	        //-------------------------
+//	        while ((ze = zin.getNextEntry()) != null) {
+//	        	//System.out.println(ze.getName());
+//	        	if(!ze.getName().startsWith("WEB-INF/classes/META-INF/"+sysEnv))continue;
+//	        	if (ze.isDirectory()) {
+//	        	} else {  
+//	        		String[] a = ze.getName().split("/");
+//        			StringBuilder sb = new StringBuilder("");
+//        			for(int i = 4 ; i<a.length-1;i++){
+//        				sb.append(a[i]);
+//        				sb.append(SystemAttrs.SYSTEM_SEPERATOR);
+//        			}
+//        			String folderName = targetFolder.getPath()+SystemAttrs.SYSTEM_SEPERATOR+sb.toString();
+//        			if(folderName.startsWith(targetFolder+SystemAttrs.SYSTEM_SEPERATOR+"RES")
+//        					||folderName.startsWith(targetFolder+SystemAttrs.SYSTEM_SEPERATOR+SystemAttrs.NODE_NAME)){
+//        				File folder = new File(folderName);
+//            			if(!folder.exists()){
+//            				folder.mkdirs();
+//            			}
+//    	        		if(ze.getName().endsWith("properties")){
+//    	        			if(ze.getName().endsWith("pom.properties"))continue;
+//    	        			copyPropertiesFile(zf.getInputStream(ze),folder.getPath()+SystemAttrs.SYSTEM_SEPERATOR+a[a.length-1],false,override);
+//    	        		}
+//    	        		else{
+//    	        			copyBinaryFile(zf.getInputStream(ze),folder.getPath()+SystemAttrs.SYSTEM_SEPERATOR+a[a.length-1],false,override);
+//    	        		}
+//        			}
+//	            }
+//	        	
+//	        }
+//	        
+//
+//		} catch (IOException e) {
+//			logger.error(e);
+//		} 
+//		finally{
+//			try {
+//				if(zin!=null)zin.close();
+//			} catch (IOException e) {
+//				logger.error(e);
+//			}
+//			try {
+//				if(in!=null)in.close();
+//			} catch (IOException e) {
+//				logger.error(e);
+//			}
+//		}
+//		
+//	}
+//	
+//	
+//	private void copyBinaryFile(InputStream inputStream, String targetPath, boolean backup, boolean override) {
+//		try{
+//			FileOutputStream fos = null;
+//     
+//    		File distFile = new File(targetPath);
+//    		
+//    		if(distFile.exists()&&(targetPath).endsWith(".db")){
+//    			//skip overriding db file
+//    			return;
+//    		}
+//    			
+//    		
+//			if (!distFile.exists()) {
+//				distFile.createNewFile();
+//			}
+//			else{
+//				if(!override)return;
+//				if(backup){
+//					distFile.renameTo(new File(targetPath+sdf.format(new Date())+".bak"));
+//					distFile = new File(targetPath);
+//				}
+//			}
+//			fos = new FileOutputStream(distFile);
+//			try{
+//				byte[] buffer = new byte[512];
+//				while(true){
+//					int ins = inputStream.read(buffer);
+//					if(ins==-1){
+//						fos.flush();
+//						break;
+//					}
+//					else{
+//						fos.write(buffer, 0, ins);
+//					}
+//				}
+//			}catch(Exception e){
+//				logger.error(e);
+//			}
+//			finally{
+//				if(fos!=null)try {fos.close();} catch (IOException e) {logger.error(e);}
+//			}
+//
+//            String osName = System.getProperty("os.name");
+//            if(osName!=null&&osName.contains("Window")){
+//    			
+//			}
+//            else{
+//            	Runtime.getRuntime().exec("chmod 775 "+targetPath);
+//            }
+//            
+//		}
+//		catch(Exception e){
+//			logger.error(e);
+//		}
+//		finally{
+//			if(inputStream!=null)try {inputStream.close();} catch (IOException e) {logger.error(e);}
+//		}
+//		
+//	}
+//	
+//	
+//	
+//	private void copyPropertiesFile(InputStream inputStream, String targetPath, boolean backup, boolean override) {
+//		try{
+//			String fileServerRoot = SystemAttrs.FILE_SERVER_ROOT;//DEV
+//			
+//			StringBuilder tmpStringBuffer = new StringBuilder("");
+//			BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));  
+//            String line;  
+//            while ((line = br.readLine()) != null) { 
+//            	tmpStringBuffer.append(line);
+//            	tmpStringBuffer.append(NEW_LINE);
+//            }
+//			String content = tmpStringBuffer.toString().replace("@systemroot", SystemAttrs.SYSTEM_ROOT);
+//			if(fileServerRoot!=null)
+//				content = content.replace("@fileserverroot", fileServerRoot);
+//			
+//			String osName = System.getProperty("os.name");
+//			if(osName!=null&&osName.contains("Window")){
+//			
+//			}
+//			else{
+//				content = content.replace("\\\\", "/");
+//			}
+//			
+//			String dbSchema = SystemAttrs.SCHEMA;
+//		
+//			if(!CommonUtil.isEmpty(dbSchema)){
+//				content = content.replace("@schema", dbSchema);
+//			}
+//            writeStrToFile(content, targetPath, "",backup,override);
+//            if(osName!=null&&osName.contains("Window")){
+//    			
+//			}
+//            else{
+//            	Runtime.getRuntime().exec("chmod 775 "+targetPath);
+//            }
+//            
+//		}
+//		catch(Exception e){
+//			logger.error(e);
+//		}
+//		finally{
+//			if(inputStream!=null)try {inputStream.close();} catch (IOException e) {logger.error(e);}
+//		}
+//		
+//	}
+//	
+//	/*private String getReplacePath(String targetPath){
+//		String osName = System.getProperty("os.name");
+//        String[] folders = null;
+//		if(osName.contains("Window")){
+//			folders = targetPath.split("\\\\");
+//		}
+//		else{
+//			folders = targetPath.split("/");
+//		}
+//		
+//		StringBuilder sb = new StringBuilder("");
+//		for(int i = 0 ; i<folders.length-2;i++){
+//			sb.append(folders[i]);
+//			sb.append(SystemAttrs.SYSTEM_SEPERATOR);
+//		}
+//		sb.deleteCharAt(sb.length()-1);
+//		if(osName.contains("Window")){
+//			return sb.toString().replace("\\", "\\\\");
+//		}
+//		else{
+//			return sb.toString();
+//		}
+//		
+//	}*/
+//	
+//	
+//	private void writeStrToFile(String fileContent,String outPath,String fileName,boolean backup, boolean override){
+//		FileOutputStream fos = null;
+//		OutputStreamWriter outputStreamWriter = null;
+//		BufferedWriter bufferWritter = null;
+//		try{
+//			File distFile = new File(outPath+fileName);
+//			if (!distFile.exists()) {
+//				distFile.createNewFile();
+//			}
+//			else{
+//				if(!override)return;
+//				if(backup){
+//					distFile.renameTo(new File(outPath+fileName+sdf.format(new Date())+".bak"));
+//					distFile = new File(outPath+fileName);
+//				}
+//			}
+//			fos = new FileOutputStream(distFile);
+//			outputStreamWriter = new OutputStreamWriter(fos, "utf-8");
+//			bufferWritter = new BufferedWriter(outputStreamWriter);
+//			bufferWritter.write(fileContent);
+//			bufferWritter.flush();
+//		}
+//		catch(Exception e){
+//			logger.error(e);
+//		}
+//		finally{
+//			if(bufferWritter!=null)try {bufferWritter.close();} catch (IOException e) {logger.error(e);}
+//			if(outputStreamWriter!=null)try {outputStreamWriter.close();} catch (IOException e) {logger.error(e);}
+//			if(fos!=null)try {fos.close();} catch (IOException e) {logger.error(e);}
+//		}
+//	}
+//}
