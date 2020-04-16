@@ -1,3 +1,3 @@
 # RegionOne
 
-Light java server framework
+Lightweight java server framework , much faster and easier.
