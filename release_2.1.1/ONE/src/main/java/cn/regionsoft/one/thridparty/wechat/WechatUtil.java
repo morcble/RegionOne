@@ -103,28 +103,4 @@ public class WechatUtil {
         result.put("signature", hexString.toString());
         return result;  
 	}
-	
-	/*public static void main(String[] args) throws Exception {
-		String code = "021hLMZE0qEwhe2F6vXE0m9wZE0hLMZ8";
-		
-		String wechatAppId = "wxf89898cbd3b4b050";
-		String wechatAppsecret = "e3c3058115c4eb69f96c0d1f6c05c858";
-		AccessTokenInfo accessTokenInfo = WechatUtil.getAccessToken(wechatAppId, wechatAppsecret, code);
-		
-		WechatUserInfo userInfo = WechatUtil.getUserInfo(accessTokenInfo.getAccess_token(),accessTokenInfo.getOpenid());
-		
-		logger.debug(1);
-	}*/
-	
-	public static void main(String[] args) throws Exception {
-		String code = "021hLMZE0qEwhe2F6vXE0m9wZE0hLMZ8";
-		
-		String wechatAppId = "wxf89898cbd3b4b050";
-		String wechatAppsecret = "e3c3058115c4eb69f96c0d1f6c05c858";
-		String aa = getAPIAccessToken(wechatAppId,wechatAppsecret);
-		String jsApiTicket = WechatUtil.getJsApiTicket(wechatAppId,wechatAppsecret);
-		String url = "http://simple-study.cn/PaymentSysFrontend/pay.html";
-		Map<String,String> singnature = WechatUtil.getApiSingnature(jsApiTicket, url);
-		logger.debug(1);
-	}
 }
