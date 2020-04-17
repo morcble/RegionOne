@@ -14,6 +14,7 @@ Quick start:
     contexts=DefaultContext
     DefaultContext.context.paths = com.test<base package name of your project>
   3.add controller and entry method
+  
     Helloworld.java:
       package com.hello;
       import cn.regionsoft.one.annotation.Controller;
