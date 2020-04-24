@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+       <Properties>
+              <!-- <Property name="log-path"></Property> -->
+       </Properties>
+ 
+       <Appenders>
+              <RollingFile name="file-log" fileName="${sys:logpath}/RSSamples/RSSamplesLocalService.log"
+                     filePattern="${sys:logpath}/RSSamples/RSSamplesLocalService-%d{yyyy-MM-dd}-%i.log">
+                     <PatternLayout>
+                           <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                           </pattern>
+                     </PatternLayout>
+                     <Policies>
+                           <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                           <SizeBasedTriggeringPolicy size="50000 KB"/>
+                     </Policies>
+                     <DefaultRolloverStrategy max="500" />
+              </RollingFile>
+             
+              <RollingFile name="file-log-error" fileName="${sys:logpath}/RSSamples/RSSamplesLocalService-error.log"
+                filePattern="${sys:logpath}/RSSamples/RSSamplesLocalService-error-%d{yyyy-MM-dd}-%i.log">
+	                <PatternLayout>
+	                       <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+	                </PatternLayout>
+	                <ThresholdFilter level="error"/>
+	                <Policies>
+	                        <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+	                        <SizeBasedTriggeringPolicy size="50000 KB"/>
+	                </Policies>
+	                <DefaultRolloverStrategy max="200" />
+	        </RollingFile>
+  
+             
+              <Console name="console" target="SYSTEM_OUT">
+                     <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+              </Console>
+       </Appenders>
+       <Loggers>
+              <Root level="ALL">
+                    <appender-ref ref="console" />
+                     <appender-ref ref="file-log-error" />
+                     <appender-ref ref="file-log" />
+              </Root>
+       </Loggers>
+ 
+</Configuration>
