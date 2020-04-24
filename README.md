@@ -2,6 +2,23 @@
 
 Lightweight java server framework , much faster and easier.
 
+Frequent use of framework tags
+@Controller 
+@RequestMapping
+@Autowired @Service
+@Cache 
+@Dao
+@Component 
+@Transactional
+@Entity 
+@Table
+@Column 
+@ID
+@Job
+@MicroConsumer 
+@MicroProvider
+@QuickEventListener 
+@SlowEventListener 
 
 Quick start:
   
@@ -43,6 +60,5 @@ Quick start:
    
   you may also download the helloworld sample project from  https://github.com/morcble/RegionOne/tree/master/samples
   
-  
 
-
+BTW, recommend the demo of frontend framework as http://regionsoft.cn/RSSamples/
